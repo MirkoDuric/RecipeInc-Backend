@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 8001;
 app.use(bodyParser.json());
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "https://recipeinc.onrender.com",
   methods: ["GET", "POST"],
   optionsSuccessStatus: 204,
 };
