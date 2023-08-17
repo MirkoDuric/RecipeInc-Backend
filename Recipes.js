@@ -26,11 +26,11 @@ app.get("/:dishType", (req, res) => {
         res.sendStatus(500);
       });
   } else {
+    const placeholders = dishIds.map((_, i) => `$${i + 1}`).join(",");
+    const queryText = `SELECT id, name, description, image_url FROM dishes WHERE id IN (${placeholders});`;
+
     pool
-      .query(
-        `SELECT id, name, description, image_url FROM dishes WHERE id IN ($1, $2, $3);`,
-        dishIds
-      )
+      .query(queryText, dishIds)
       .then(({ rows }) => res.json(rows))
       .catch((err) => {
         console.error(err);
